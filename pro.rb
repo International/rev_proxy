@@ -19,6 +19,7 @@ Proxy.start(:host => host, :port => port) do |conn|
     puts "New session: #{session} (#{h.inspect})"
 
     host, port = h['Host'].split(':')
+    # Don't fwd curl requests
     unless h["User-Agent"] =~ /curl/i
       conn.server session, :host => host, :port => (port || 80) #, :bind_host => conn.sock[0] - # for bind ip
 
